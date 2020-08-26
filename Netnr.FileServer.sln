@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29411.108
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Netnr.FileServer", "Netnr.FileServer\Netnr.FileServer.csproj", "{8011BF79-9D7E-4112-802F-5994F7307AF7}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Netnr.Fast", "Netnr.Fast\Netnr.Fast.csproj", "{2C95C53D-4D63-467A-8C27-762DC108AF03}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8011BF79-9D7E-4112-802F-5994F7307AF7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8011BF79-9D7E-4112-802F-5994F7307AF7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8011BF79-9D7E-4112-802F-5994F7307AF7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8011BF79-9D7E-4112-802F-5994F7307AF7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2C95C53D-4D63-467A-8C27-762DC108AF03}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2C95C53D-4D63-467A-8C27-762DC108AF03}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2C95C53D-4D63-467A-8C27-762DC108AF03}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2C95C53D-4D63-467A-8C27-762DC108AF03}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {54763F80-DDFC-4691-9190-13D9EA6A030D}
+	EndGlobalSection
+EndGlobal

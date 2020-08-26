@@ -21,9 +21,11 @@ namespace Netnr.FileServer.Controllers
         /// 创建App，仅限开发环境调用
         /// </summary>
         /// <param name="password">密码，必填，默认密码：nr</param>
+        /// <param name="skName">App 名称</param>
+        /// <param name="skRemark">App 备注</param>
         /// <returns></returns>
         [HttpGet]
-        public ActionResultVM CreateApp(string password)
+        public ActionResultVM CreateApp(string password, string skName, string skRemark )
         {
             var vm = new ActionResultVM();
 
@@ -33,7 +35,7 @@ namespace Netnr.FileServer.Controllers
                 {
                     if (!string.IsNullOrWhiteSpace(password) && password == GlobalTo.GetValue("Safe:CreateAppPassword"))
                     {
-                        vm = SQLiteBase.CreateApp();
+                        vm = SQLiteBase.CreateApp(skName, skRemark);
                     }
                     else
                     {

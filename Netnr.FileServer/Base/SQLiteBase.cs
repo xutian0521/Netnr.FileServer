@@ -19,7 +19,7 @@ namespace Netnr.FileServer.Base
         /// 创建App
         /// </summary>
         /// <returns></returns>
-        public static ActionResultVM CreateApp()
+        public static ActionResultVM CreateApp(string skName = null, string skRemark = null)
         {
             var vm = new ActionResultVM();
 
@@ -33,10 +33,10 @@ namespace Netnr.FileServer.Base
                     SkAppId = Core.UniqueTo.LongId().ToString(),
                     SkAppKey = Core.UniqueTo.LongId().ToString() + Core.UniqueTo.LongId().ToString(),
                     SkCreateTime = DateTime.Now,
-                    SkName = "默认",
+                    SkName = skName == null ? "默认": skName,
                     SkToken = Core.CalcTo.MD5(Core.UniqueTo.LongId().ToString()),
                     SkTokenExpireTime = DateTime.Now.AddMinutes(GlobalTo.GetValue<int>("Safe:TokenExpired")),
-                    SkRemark = "系统自动生成"
+                    SkRemark = skRemark == null ? "系统自动生成": skRemark
                 };
 
                 int num = db.Insert(mo);

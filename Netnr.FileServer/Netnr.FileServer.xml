@@ -14,7 +14,7 @@
             连接字符串
             </summary>
         </member>
-        <member name="M:Netnr.FileServer.Base.SQLiteBase.CreateApp">
+        <member name="M:Netnr.FileServer.Base.SQLiteBase.CreateApp(System.String,System.String)">
             <summary>
             创建App
             </summary>
@@ -68,11 +68,13 @@
             API接口
             </summary>
         </member>
-        <member name="M:Netnr.FileServer.Controllers.APIController.CreateApp(System.String)">
+        <member name="M:Netnr.FileServer.Controllers.APIController.CreateApp(System.String,System.String,System.String)">
             <summary>
             创建App，仅限开发环境调用
             </summary>
             <param name="password">密码，必填，默认密码：nr</param>
+            <param name="skName">App 名称</param>
+            <param name="skRemark">App 备注</param>
             <returns></returns>
         </member>
         <member name="M:Netnr.FileServer.Controllers.APIController.GetAppList(System.Int32,System.Int32)">

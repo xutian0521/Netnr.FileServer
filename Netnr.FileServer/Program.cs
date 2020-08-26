@@ -34,6 +34,10 @@ namespace Netnr.FileServer
                     {
                         webBuilder.UseUrls(args[0]);
                     }
+                    else
+                    {
+                        webBuilder.UseUrls("http://*:5012");
+                    }
                 });
     }
 }
