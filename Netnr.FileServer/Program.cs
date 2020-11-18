@@ -36,7 +36,7 @@ namespace Netnr.FileServer
                     }
                     else
                     {
-                        webBuilder.UseUrls("http://*:5012");
+                        webBuilder.UseUrls("http://*:7013");
                     }
                 });
     }

@@ -110,6 +110,16 @@
             <param name="subdir">子目录，可选</param>
             <returns></returns>
         </member>
+        <member name="M:Netnr.FileServer.Controllers.APIController.UploadBase64(System.String,System.String,System.String,System.String)">
+            <summary>
+            上传文件，base64
+            </summary>
+            <param name="base64">base64</param>
+            <param name="token">token，授权验证，必填</param>
+            <param name="owner">所属者，一个应用对应一个所属者，必填</param>
+            <param name="subdir">子目录，可选</param>
+            <returns></returns>
+        </member>
         <member name="M:Netnr.FileServer.Controllers.APIController.Copy(System.String,System.String)">
             <summary>
             复制文件

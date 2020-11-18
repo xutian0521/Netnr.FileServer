@@ -284,6 +284,112 @@ namespace Netnr.FileServer.Controllers
             return vm;
         }
 
+
+        /// <summary>
+        /// 上传文件，base64
+        /// </summary>
+        /// <param name="base64">base64</param>
+        /// <param name="token">token，授权验证，必填</param>
+        /// <param name="owner">所属者，一个应用对应一个所属者，必填</param>
+        /// <param name="subdir">子目录，可选</param>
+        /// <returns></returns>
+        [HttpPost]
+        [HttpOptions]
+        public ActionResultVM UploadBase64(string base64, string token, string owner, string subdir)
+        {
+            var vm = new ActionResultVM();
+
+            try
+            {
+                if (string.IsNullOrEmpty(base64))
+                {
+                    vm.msg = "未找到上传文件";
+                }
+                else if (string.IsNullOrWhiteSpace(owner))
+                {
+                    vm.msg = "owner不能为空";
+                }
+                else
+                {
+                    owner = owner.Trim();
+
+                    //验证token
+                    var vt = SQLiteBase.ValidToken(token);
+                    if (vt.code != 200)
+                    {
+                        vm = vt;
+                    }
+                    else
+                    {
+                        var listFr = new List<FileRecord>();
+
+                        var rootdir = GlobalTo.GetValue("StaticResource:RootDir") + owner;
+                        if (!string.IsNullOrWhiteSpace(subdir))
+                        {
+                            rootdir += subdir;
+                        }
+
+                        var now = DateTime.Now;
+
+                        var path = $"{rootdir.TrimEnd('/')}/{now.Year}/{now.ToString("MM")}/";
+                        var pathMp = GlobalTo.WebRootPath + path;
+                        if (!Directory.Exists(pathMp))
+                        {
+                            Directory.CreateDirectory(pathMp);
+                        }
+
+                        string strbase64 = base64.Trim().Substring(base64.IndexOf(",") + 1);
+                        string str1 = base64.Trim().Substring(0, base64.IndexOf(","));
+                        string str2 = str1.Substring(0, str1.IndexOf(";"));
+                        string str3 = str2.Substring(str2.IndexOf("/") +1, str2.Length - str2.IndexOf("/") -1);
+                        string FileName = DateTime.Now.Ticks.ToString() + "." + str3;
+                        byte[] bytes = Convert.FromBase64String(strbase64);
+                        MemoryStream memory = new MemoryStream(bytes);
+                        {
+                            var fr = new FileRecord()
+                            {
+                                FrId = Core.UniqueTo.LongId().ToString(),
+                                FrOwnerUser = owner,
+                                FrName = FileName,
+                                FrSize = bytes.Length.ToString(),
+                                FrType = str1,
+                                FrCreateTime = now
+                            };
+                            using (var fs = new FileStream(pathMp + FileName, FileMode.CreateNew))
+                            {
+                                memory.CopyTo(fs);
+                                fs.Flush();
+                            }
+
+                            fr.FrPath = path + FileName;
+                            listFr.Add(fr);
+                        }
+
+                        vm = SQLiteBase.InsertFile(listFr);
+                        if (vm.code == 200)
+                        {
+                            if (listFr.Count == 1)
+                            {
+                                vm.data = listFr.First();
+                            }
+                            else
+                            {
+                                vm.data = listFr;
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                vm.Set(ex);
+                Core.ConsoleTo.Log(ex);
+            }
+
+            return vm;
+        }
+
+
         /// <summary>
         /// 复制文件
         /// </summary>
