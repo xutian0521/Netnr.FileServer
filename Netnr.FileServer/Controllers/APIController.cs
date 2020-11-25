@@ -224,7 +224,7 @@ namespace Netnr.FileServer.Controllers
                         var rootdir = GlobalTo.GetValue("StaticResource:RootDir") + owner;
                         if (!string.IsNullOrWhiteSpace(subdir))
                         {
-                            rootdir += subdir;
+                            rootdir += "/" + subdir;
                         }
 
                         var now = DateTime.Now;
